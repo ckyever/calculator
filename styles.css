@@ -1,3 +1,61 @@
-h1 {
-  color: gold;
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.row {
+  display: flex;
+}
+
+.button {
+  border: 1px solid black;
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+}
+
+.horizontal-rectangle {
+  width: 105px;
+  height: 50px;
+}
+
+.vertical-rectangle {
+  width: 50px;
+  height: 105px;
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+}
+
+#display {
+  height: 50px;
+  width: 215px;
+  border: 1px solid black;
+}
+
+#numpad {
+  display: flex;
+}
+
+#main-numpad {
+  display: flex;
+  flex-direction: column;
+}
+
+#side-numpad {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add even gaps between all buttons */
+
+#calculator, #numpad, #side-numpad, #main-numpad, .row {
+  gap: 5px;
 }
