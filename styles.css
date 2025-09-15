@@ -55,7 +55,6 @@ html {
 }
 
 /* Add even gaps between all buttons */
-
 #calculator, #numpad, #side-numpad, #main-numpad, .row {
   gap: 5px;
 }
