@@ -48,3 +48,13 @@ function operate(x, y, operator) {
 let firstValue;
 let secondValue;
 let operator;
+
+const display = document.querySelector("output");
+
+// Handle digit buttons
+const digitButtons = document.querySelectorAll(".digit");
+digitButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    display.value += button.textContent;
+  });
+});
