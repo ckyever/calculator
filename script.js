@@ -43,3 +43,8 @@ function operate(x, y, operator) {
 
   return answer;
 }
+
+// Holds the operands and operator
+let firstValue;
+let secondValue;
+let operator;
