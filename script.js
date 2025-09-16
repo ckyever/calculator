@@ -24,7 +24,7 @@ const EQUALS_SIGN = '=';
 const CLEAR_SIGN = 'C';
 const DECIMAL_SIGN = '.';
 
-// General function to determine which math operation should be done
+// Wrapper function to determine which math operation should be done
 function operate(x, y, operator) {
   let answer;
   x = Number(x);
@@ -50,3 +50,33 @@ function operate(x, y, operator) {
 
   return answer;
 }
+
+// Actual calculator logic below
+let previousValue;
+let currentValue;
+let currentOperator;
+let isNextValue = false;
+
+const display = document.querySelector("output");
+
+const digitButtons = document.querySelectorAll(".digit");
+digitButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (isNextValue) {
+      display.textContent = button.textContent;
+      isNextValue = false;
+    } else {
+      display.textContent += button.textContent;
+    }
+    currentValue = display.textContent;
+  });
+});
+
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    previousValue = currentValue;
+    currentOperator = button.textContent;
+    isNextValue = true;
+  });
+});
