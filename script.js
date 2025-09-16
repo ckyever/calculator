@@ -75,6 +75,10 @@ digitButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (previousValue && currentValue) {
+      // Evaluate the previous pair of values first
+      doEquals();
+    }
     previousValue = currentValue;
     currentOperator = button.textContent;
     isNextValue = true;
