@@ -63,11 +63,19 @@ function saveButtonHistory(button) {
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach(button => {
   button.addEventListener("click", () => {
-    if (previousButton && (String(previousButton).includes(VALID_OPERATORS))) {
+    if (previousButton && (VALID_OPERATORS.includes(String(previousButton)))) {
       display.value = button.textContent;
     } else {
       display.value += button.textContent;
     }
+    saveButtonHistory(button.textContent);
+  });
+});
+
+// Handle operator button pressed
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach(button => {
+  button.addEventListener("click", () => {
     saveButtonHistory(button.textContent);
   });
 });
