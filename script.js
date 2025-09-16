@@ -15,12 +15,16 @@ function divide(x, y) {
   return x / y;
 }
 
+// Represents our non-numeric buttons
 const ADD_OPERATOR = '+';
 const SUBTRACT_OPERATOR = '-';
 const MULTIPLY_OPERATOR = '×';
 const DIVIDE_OPERATOR = '÷';
 const EQUALS_SIGN = '=';
+const CLEAR_SIGN = 'C';
+const DECIMAL_SIGN = '.';
 
+// General function to determine which math operation should be done
 function operate(x, y, operator) {
   let answer;
   x = Number(x);
@@ -47,7 +51,6 @@ function operate(x, y, operator) {
   return answer;
 }
 
-// Holds the operands and operator
 let previousValue
 let previousOperator;
 let previousButton;
@@ -65,7 +68,6 @@ function addNextNumber(number) {
 
 const VALID_OPERATORS = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR + EQUALS_SIGN;
 
-// Handle digit buttons
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach(button => {
   button.addEventListener("click", () => {
@@ -78,7 +80,6 @@ digitButtons.forEach(button => {
   });
 });
 
-// Handle operator button pressed
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
