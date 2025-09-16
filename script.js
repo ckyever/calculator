@@ -24,6 +24,11 @@ const EQUALS_SIGN = '=';
 const CLEAR_SIGN = 'C';
 const DECIMAL_SIGN = '.';
 
+const OPERATOR_CHECK = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR;
+function isOperator(check) {
+  return OPERATOR_CHECK.includes(check);
+}
+
 // Wrapper function to determine which math operation should be done
 function operate(x, y, operator) {
   let answer;
@@ -55,6 +60,7 @@ function operate(x, y, operator) {
 let previousValue;
 let currentValue;
 let currentOperator;
+let previousButtonPressed;
 let isNextValue = false;
 
 const display = document.querySelector("output");
@@ -69,12 +75,17 @@ digitButtons.forEach((button) => {
       display.textContent += button.textContent;
     }
     currentValue = display.textContent;
+    previousButtonPressed = button.textContent;
   });
 });
 
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (isOperator(previousButtonPressed)) {
+      currentOperator = button.textContent;
+      return;
+    }
     if (previousValue && currentValue) {
       // Evaluate the previous pair of values first
       doEquals();
@@ -82,6 +93,7 @@ operatorButtons.forEach((button) => {
     previousValue = currentValue;
     currentOperator = button.textContent;
     isNextValue = true;
+    previousButtonPressed = button.textContent;
   });
 });
 
@@ -94,7 +106,10 @@ function doEquals() {
   }
 }
 const equalsButton = document.querySelector("#equals");
-equalsButton.addEventListener("click", () => doEquals());
+equalsButton.addEventListener("click", () => {
+  doEquals()
+  previousButtonPressed = equalsButton.textContent;
+});
 
 const clearButton = document.querySelector("#clear");
 clearButton.addEventListener("click", () => {
@@ -102,4 +117,5 @@ clearButton.addEventListener("click", () => {
   currentValue = null;
   display.textContent = null;
   currentOperator = null;
+  previousButtonPressed = clearButton.textContent;
 });
