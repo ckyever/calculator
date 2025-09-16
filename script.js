@@ -15,15 +15,11 @@ function divide(x, y) {
   return x / y;
 }
 
-// Handle operations
 const ADD_OPERATOR = '+';
 const SUBTRACT_OPERATOR = '-';
 const MULTIPLY_OPERATOR = '×';
 const DIVIDE_OPERATOR = '÷';
 const EQUALS_SIGN = '=';
-
-// Use this for checks
-const VALID_OPERATORS = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR + EQUALS_SIGN;
 
 function operate(x, y, operator) {
   let answer;
@@ -66,6 +62,8 @@ function addNextNumber(number) {
   previousValue = display.value;
   display.value = number;
 }
+
+const VALID_OPERATORS = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR + EQUALS_SIGN;
 
 // Handle digit buttons
 const digitButtons = document.querySelectorAll(".digit");
