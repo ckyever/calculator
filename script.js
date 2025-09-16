@@ -81,6 +81,10 @@ digitButtons.forEach(button => {
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach(button => {
   button.addEventListener("click", () => {
+    // If we have a previous number and numbers in the current display do operate
+    if (previousValue != null && display.value != null) {
+      display.value = operate(previousValue, display.value, button.textContent);
+    }
     saveButtonHistory(button.textContent);
   });
 });
