@@ -80,3 +80,12 @@ operatorButtons.forEach((button) => {
     isNextValue = true;
   });
 });
+
+function doEquals() {
+  currentValue = operate(previousValue, currentValue, currentOperator);
+  display.textContent = currentValue;
+  previousValue = null;
+  currentOperator = null;
+}
+const equalsButton = document.querySelector("#equals");
+equalsButton.addEventListener("click", () => doEquals());
