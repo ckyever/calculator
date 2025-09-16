@@ -20,6 +20,10 @@ const ADD_OPERATOR = '+';
 const SUBTRACT_OPERATOR = '-';
 const MULTIPLY_OPERATOR = '×';
 const DIVIDE_OPERATOR = '÷';
+const EQUALS_SIGN = '=';
+
+// Use this for checks
+const VALID_OPERATORS = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR + EQUALS_SIGN;
 
 function operate(x, y, operator) {
   let answer;
@@ -45,16 +49,25 @@ function operate(x, y, operator) {
 }
 
 // Holds the operands and operator
-let firstValue;
-let secondValue;
-let operator;
+let previousValue
+let previousOperator;
+let previousButton;
 
 const display = document.querySelector("output");
+
+function saveButtonHistory(button) {
+  previousButton = button;
+}
 
 // Handle digit buttons
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach(button => {
   button.addEventListener("click", () => {
-    display.value += button.textContent;
+    if (previousButton && (String(previousButton).includes(VALID_OPERATORS))) {
+      display.value = button.textContent;
+    } else {
+      display.value += button.textContent;
+    }
+    saveButtonHistory(button.textContent);
   });
 });
