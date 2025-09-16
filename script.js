@@ -91,3 +91,11 @@ operatorButtons.forEach(button => {
     saveButtonHistory(button.textContent);
   });
 });
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () =>{
+  previousValue = null;
+  previousOperator = null;
+  saveButtonHistory(clearButton.textContent);
+  display.value = "";
+});
