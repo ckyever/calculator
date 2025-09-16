@@ -86,10 +86,20 @@ operatorButtons.forEach((button) => {
 });
 
 function doEquals() {
-  currentValue = operate(previousValue, currentValue, currentOperator);
-  display.textContent = currentValue;
-  previousValue = null;
-  currentOperator = null;
+  if (previousValue && currentValue) {
+    currentValue = operate(previousValue, currentValue, currentOperator);
+    display.textContent = currentValue;
+    previousValue = null;
+    currentOperator = null;
+  }
 }
 const equalsButton = document.querySelector("#equals");
 equalsButton.addEventListener("click", () => doEquals());
+
+const clearButton = document.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+  previousValue = null;
+  currentValue = null;
+  display.textContent = null;
+  currentOperator = null;
+});
