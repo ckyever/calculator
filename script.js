@@ -107,8 +107,15 @@ function doEquals() {
 }
 const equalsButton = document.querySelector("#equals");
 equalsButton.addEventListener("click", () => {
-  doEquals()
-  previousButtonPressed = equalsButton.textContent;
+  if (isOperator(previousButtonPressed)) {
+    // Handle premature equals pressed
+    previousValue = null;
+    currentOperator = null;
+    isNextValue = true;
+  } else {
+    doEquals()
+    previousButtonPressed = equalsButton.textContent;
+  }
 });
 
 const clearButton = document.querySelector("#clear");
