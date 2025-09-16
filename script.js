@@ -59,12 +59,17 @@ function saveButtonHistory(button) {
   previousButton = button;
 }
 
+function addNextNumber(number) {
+  previousValue = display.value;
+  display.value = number;
+}
+
 // Handle digit buttons
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach(button => {
   button.addEventListener("click", () => {
     if (previousButton && (VALID_OPERATORS.includes(String(previousButton)))) {
-      display.value = button.textContent;
+      addNextNumber(button.textContent);
     } else {
       display.value += button.textContent;
     }
