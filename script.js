@@ -27,18 +27,21 @@ const VALID_OPERATORS = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + D
 
 function operate(x, y, operator) {
   let answer;
+  x = Number(x);
+  y = Number(y);
+
   switch (operator) {
     case ADD_OPERATOR:
       answer = add(x, y);
       break;
     case SUBTRACT_OPERATOR:
-      answer = add(x, y);
+      answer = subtract(x, y);
       break;
     case MULTIPLY_OPERATOR:
-      answer = add(x, y);
+      answer = multiply(x, y);
       break;
     case DIVIDE_OPERATOR:
-      answer = add(x, y);
+      answer = divide(x, y);
       break;
     default:
       answer = null;
