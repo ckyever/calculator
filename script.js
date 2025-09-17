@@ -109,7 +109,7 @@ operatorButtons.forEach((button) => {
 
 function doEquals() {
   // If previous value is not a number (e.g. error message) then ignore the operation
-  if (Number(previousValue) && currentValue) {
+  if (!isNaN(previousValue) && currentValue) {
     currentValue = operate(previousValue, currentValue, currentOperator);
     display.textContent = currentValue;
     previousValue = null;
