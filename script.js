@@ -30,7 +30,7 @@ function isOperator(check) {
   return OPERATOR_CHECK.includes(check);
 }
 
-const ZERO_DIVISION_MESSAGE = "Can't divide by 0 little bro"
+const ZERO_DIVISION_MESSAGE = "Don't do that!"
 
 // Wrapper function to determine which math operation should be done
 function operate(x, y, operator) {
