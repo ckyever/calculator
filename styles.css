@@ -2,6 +2,11 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+}
+
 *, *::before, *::after {
   box-sizing: inherit;
 }
@@ -20,24 +25,27 @@ html {
 }
 
 .horizontal-rectangle {
-  width: 165px;
+  width: 168px;
   height: 80px;
 }
 
 .vertical-rectangle {
   width: 80px;
-  height: 165px;
+  height: 168px;
 }
 
 #calculator {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
+  padding: 16px;
+  background-color: lightblue;
+
 }
 
 #display {
   height: 80px;
-  width: 335px;
+  width: 344px;
   border: 1px solid black;
 }
 
@@ -57,5 +65,5 @@ html {
 
 /* Add even gaps between all buttons */
 #calculator, #numpad, #side-numpad, #main-numpad, .row {
-  gap: 5px;
+  gap: 8px;
 }
