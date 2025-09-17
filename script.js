@@ -131,6 +131,9 @@ function doEquals() {
 }
 
 const clickEqualsButton = () => {
+  if (previousValue == null) {
+    return
+  }
   if (!isOperator(previousButtonPressed)) {
     doEquals()
   }
