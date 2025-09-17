@@ -1,15 +1,12 @@
 html {
   font-family: "DM Mono", monospace;
+  font-size: 34px;
   box-sizing: border-box;
 }
 
 body {
   display: flex;
   justify-content: center;
-}
-
-output {
-  font-size: 38px;
 }
 
 *, *::before, *::after {
@@ -21,11 +18,11 @@ output {
 }
 
 .button {
+  font-size: 28px;
   border: 2px solid black;
   border-radius: 16px;
   text-align: center;
   padding-top: 8px;
-  font-weight: 500;
 }
 
 .square {
@@ -41,11 +38,6 @@ output {
 .vertical-rectangle {
   width: 80px;
   height: 168px;
-}
-
-.operator, #equals {
-  padding-top: 4px;
-  font-size: 24px;
 }
 
 #calculator {
