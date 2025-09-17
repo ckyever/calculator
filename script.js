@@ -135,3 +135,23 @@ clearButton.addEventListener("click", () => {
   currentOperator = null;
   previousButtonPressed = clearButton.textContent;
 });
+
+const decimalButton = document.querySelector("#decimal");
+const clickDecimal = () => {
+  if (isNextValue) {
+    display.textContent = "0.";
+    currentValue = display.textContent;
+    isNextValue = false;
+  } else {
+      if (currentValue) {
+      if (!currentValue.includes(DECIMAL_SIGN)) {
+        display.textContent += DECIMAL_SIGN;
+        currentValue = display.textContent;
+      }
+    } else {
+      display.textContent = "0.";
+      currentValue = display.textContent;
+    }
+  }
+};
+decimalButton.addEventListener("click", clickDecimal);
