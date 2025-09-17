@@ -59,6 +59,10 @@ function operate(x, y, operator) {
       console.warn(`Unknown operator ${operator}`);
   }
 
+  if (!isNaN(answer)) {
+    answer = parseFloat(answer.toFixed(10));
+  }
+
   return answer;
 }
 
