@@ -118,10 +118,16 @@ const clickOperatorButton = (operator) => {
   previousButtonPressed = operator;
 };
 
+const clearSelectedStyle = () => {
+  operatorButtons.forEach((button) => button.classList.remove("selected"));
+};
+
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
+    clearSelectedStyle()
     clickOperatorButton(event.currentTarget.textContent);
+    button.classList.toggle("selected");
   });
 });
 
@@ -133,6 +139,7 @@ function doEquals() {
     previousValue = null;
     currentOperator = null;
   }
+  clearSelectedStyle();
 }
 
 const clickEqualsButton = () => {
@@ -152,6 +159,7 @@ equalsButton.addEventListener("click", clickEqualsButton);
 
 const clearButton = document.querySelector("#clear");
 const clickClearButton = () => {
+  clearSelectedStyle();
   previousValue = null;
   currentValue = null;
   display.textContent = null;

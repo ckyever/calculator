@@ -1,6 +1,7 @@
 :root {
   --base-color: #3E3E3E;
   --border-color: #CFDEEB;
+  --selected-border-color: #62a4dd;
   --text-color: white;
   --main-key-color: #6D7F96;
   --secondary-key-color: #445268; 
@@ -66,6 +67,11 @@ body {
 
 .accent-key {
   background-color: var(--accent-key-color);
+}
+
+.selected {
+  border-color: var(--selected-border-color);
+  border-width: 3px;
 }
 
 #calculator {
