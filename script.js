@@ -29,6 +29,8 @@ function isOperator(check) {
   return OPERATOR_CHECK.includes(check);
 }
 
+const ZERO_DIVISION_MESSAGE = "Can't divide by 0 little bro"
+
 // Wrapper function to determine which math operation should be done
 function operate(x, y, operator) {
   let answer;
@@ -46,7 +48,11 @@ function operate(x, y, operator) {
       answer = multiply(x, y);
       break;
     case DIVIDE_OPERATOR:
-      answer = divide(x, y);
+      if (y === 0) {
+        answer = ZERO_DIVISION_MESSAGE
+      } else {
+        answer = divide(x, y);
+      }
       break;
     default:
       answer = null;
@@ -102,7 +108,8 @@ operatorButtons.forEach((button) => {
 });
 
 function doEquals() {
-  if (previousValue && currentValue) {
+  // If previous value is not a number (e.g. error message) then ignore the operation
+  if (Number(previousValue) && currentValue) {
     currentValue = operate(previousValue, currentValue, currentOperator);
     display.textContent = currentValue;
     previousValue = null;
