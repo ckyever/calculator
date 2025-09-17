@@ -33,6 +33,12 @@ body {
   border-radius: 16px;
   text-align: center;
   padding-top: 8px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(85%);
 }
 
 .square {
