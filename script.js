@@ -18,10 +18,11 @@ function divide(x, y) {
 // Represents our non-numeric buttons
 const ADD_OPERATOR = '+';
 const SUBTRACT_OPERATOR = '-';
-const MULTIPLY_OPERATOR = '×';
-const DIVIDE_OPERATOR = '÷';
+const MULTIPLY_OPERATOR = '*';
+const DIVIDE_OPERATOR = '/';
 const EQUALS_SIGN = '=';
 const CLEAR_SIGN = 'C';
+const DELETE_SIGN = 'DEL';
 const DECIMAL_SIGN = '.';
 
 const OPERATOR_CHECK = ADD_OPERATOR + SUBTRACT_OPERATOR + MULTIPLY_OPERATOR + DIVIDE_OPERATOR;
@@ -75,31 +76,31 @@ let isNextValue = false;
 
 const display = document.querySelector("output");
 
-const clickDigitButton = (event) => {
-  const button = event.currentTarget;
+const clickDigitButton = (digit) => {
   if (currentValue === "0" && !isNextValue) {
     // Can't add numbers after 0
     return
   }
   if (isNextValue) {
-    display.textContent = button.textContent;
+    display.textContent = digit;
     isNextValue = false;
   } else {
-    display.textContent += button.textContent;
+    display.textContent += digit;
   }
   currentValue = display.textContent;
-  previousButtonPressed = button.textContent;
+  previousButtonPressed = digit;
 };
 
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach((button) => {
-  button.addEventListener("click", clickDigitButton);
+  button.addEventListener("click", (event) => {
+    clickDigitButton(event.currentTarget.textContent);
+  });
 });
 
-const clickOperatorButton = (event) => {
-  const button = event.currentTarget;
+const clickOperatorButton = (operator) => {
   if (isOperator(previousButtonPressed)) {
-    currentOperator = button.textContent;
+    currentOperator = operator;
     return;
   }
   if (previousValue && currentValue) {
@@ -107,14 +108,16 @@ const clickOperatorButton = (event) => {
     doEquals();
   }
   previousValue = currentValue;
-  currentOperator = button.textContent;
+  currentOperator = operator;
   isNextValue = true;
-  previousButtonPressed = button.textContent;
+  previousButtonPressed = operator;
 };
 
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
-  button.addEventListener("click", clickOperatorButton);
+  button.addEventListener("click", (event) => {
+    clickOperatorButton(event.currentTarget.textContent);
+  });
 });
 
 function doEquals() {
@@ -127,7 +130,6 @@ function doEquals() {
   }
 }
 
-const equalsButton = document.querySelector("#equals");
 const clickEqualsButton = () => {
   if (!isOperator(previousButtonPressed)) {
     doEquals()
@@ -135,8 +137,9 @@ const clickEqualsButton = () => {
   previousValue = null;
   currentOperator = null;
   isNextValue = true;
-  previousButtonPressed = equalsButton.textContent;
+  previousButtonPressed = EQUALS_SIGN;
 };
+const equalsButton = document.querySelector("#equals");
 equalsButton.addEventListener("click", clickEqualsButton);
 
 const clearButton = document.querySelector("#clear");
@@ -145,12 +148,11 @@ const clickClearButton = () => {
   currentValue = null;
   display.textContent = null;
   currentOperator = null;
-  previousButtonPressed = clearButton.textContent;
+  previousButtonPressed = CLEAR_SIGN;
 };
 clearButton.addEventListener("click", clickClearButton);
 
-const decimalButton = document.querySelector("#decimal");
-const clickDecimal = () => {
+const clickDecimalButton = () => {
   if (isNextValue) {
     display.textContent = "0.";
     currentValue = display.textContent;
@@ -166,14 +168,61 @@ const clickDecimal = () => {
       currentValue = display.textContent;
     }
   }
-  previousButtonPressed = decimalButton.textContent;
+  previousButtonPressed = DECIMAL_SIGN;
 };
-decimalButton.addEventListener("click", clickDecimal);
+const decimalButton = document.querySelector("#decimal");
+decimalButton.addEventListener("click", clickDecimalButton);
 
-const deleteButton = document.querySelector("#delete");
-const clickDelete = () => {
+const clickDeleteButton = () => {
   currentValue = null;
   display.textContent = null;
-  previousButtonPressed = deleteButton.textContent;
+  previousButtonPressed = DELETE_SIGN;
 }
-deleteButton.addEventListener("click", clickDelete);
+const deleteButton = document.querySelector("#delete");
+deleteButton.addEventListener("click", clickDeleteButton);
+
+// Keyboard support
+const handleKeyboard = (event) => {
+  console.log("key=" + event.key);
+  switch (event.key) {
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+      clickDigitButton(event.key);
+      break;
+
+    case ADD_OPERATOR:
+    case SUBTRACT_OPERATOR:
+    case MULTIPLY_OPERATOR:
+    case DIVIDE_OPERATOR:
+      clickOperatorButton(event.key);
+      break;
+
+    case DECIMAL_SIGN:
+      clickDecimalButton();
+      break;
+
+    case EQUALS_SIGN:
+    case "Enter":
+      clickEqualsButton();
+      break;
+
+    case "c":
+    case "C":
+      clickClearButton();
+      break;
+
+    case "Backspace":
+    case "Delete":
+      clickDeleteButton();
+      break;
+  }
+};
+document.addEventListener("keydown", handleKeyboard);
