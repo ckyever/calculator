@@ -18,8 +18,8 @@ function divide(x, y) {
 // Represents our non-numeric buttons
 const ADD_OPERATOR = '+';
 const SUBTRACT_OPERATOR = '-';
-const MULTIPLY_OPERATOR = '*';
-const DIVIDE_OPERATOR = '/';
+const MULTIPLY_OPERATOR = '×';
+const DIVIDE_OPERATOR = '÷';
 const EQUALS_SIGN = '=';
 const CLEAR_SIGN = 'C';
 const DELETE_SIGN = 'DEL';
@@ -209,6 +209,14 @@ const handleKeyboard = (event) => {
     case MULTIPLY_OPERATOR:
     case DIVIDE_OPERATOR:
       clickOperatorButton(event.key);
+      break;
+
+    case "*":
+      clickOperatorButton(MULTIPLY_OPERATOR);
+      break;
+
+    case "/":
+      clickOperatorButton(DIVIDE_OPERATOR);
       break;
 
     case DECIMAL_SIGN:
