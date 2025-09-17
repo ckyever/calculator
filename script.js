@@ -186,7 +186,6 @@ deleteButton.addEventListener("click", clickDeleteButton);
 
 // Keyboard support
 const handleKeyboard = (event) => {
-  console.log("key=" + event.key);
   switch (event.key) {
     case "0":
     case "1":
