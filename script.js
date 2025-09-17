@@ -75,40 +75,46 @@ let isNextValue = false;
 
 const display = document.querySelector("output");
 
+const clickDigitButton = (event) => {
+  const button = event.currentTarget;
+  if (currentValue === "0" && !isNextValue) {
+    // Can't add numbers after 0
+    return
+  }
+  if (isNextValue) {
+    display.textContent = button.textContent;
+    isNextValue = false;
+  } else {
+    display.textContent += button.textContent;
+  }
+  currentValue = display.textContent;
+  previousButtonPressed = button.textContent;
+};
+
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (currentValue === "0" && !isNextValue) {
-      // Can't add numbers after 0
-      return
-    }
-    if (isNextValue) {
-      display.textContent = button.textContent;
-      isNextValue = false;
-    } else {
-      display.textContent += button.textContent;
-    }
-    currentValue = display.textContent;
-    previousButtonPressed = button.textContent;
-  });
+  button.addEventListener("click", clickDigitButton);
 });
+
+const clickOperatorButton = (event) => {
+  const button = event.currentTarget;
+  if (isOperator(previousButtonPressed)) {
+    currentOperator = button.textContent;
+    return;
+  }
+  if (previousValue && currentValue) {
+    // Evaluate the previous pair of values first
+    doEquals();
+  }
+  previousValue = currentValue;
+  currentOperator = button.textContent;
+  isNextValue = true;
+  previousButtonPressed = button.textContent;
+};
 
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (isOperator(previousButtonPressed)) {
-      currentOperator = button.textContent;
-      return;
-    }
-    if (previousValue && currentValue) {
-      // Evaluate the previous pair of values first
-      doEquals();
-    }
-    previousValue = currentValue;
-    currentOperator = button.textContent;
-    isNextValue = true;
-    previousButtonPressed = button.textContent;
-  });
+  button.addEventListener("click", clickOperatorButton);
 });
 
 function doEquals() {
@@ -120,8 +126,9 @@ function doEquals() {
     currentOperator = null;
   }
 }
+
 const equalsButton = document.querySelector("#equals");
-equalsButton.addEventListener("click", () => {
+const clickEqualsButton = () => {
   if (!isOperator(previousButtonPressed)) {
     doEquals()
   }
@@ -129,16 +136,18 @@ equalsButton.addEventListener("click", () => {
   currentOperator = null;
   isNextValue = true;
   previousButtonPressed = equalsButton.textContent;
-});
+};
+equalsButton.addEventListener("click", clickEqualsButton);
 
 const clearButton = document.querySelector("#clear");
-clearButton.addEventListener("click", () => {
+const clickClearButton = () => {
   previousValue = null;
   currentValue = null;
   display.textContent = null;
   currentOperator = null;
   previousButtonPressed = clearButton.textContent;
-});
+};
+clearButton.addEventListener("click", clickClearButton);
 
 const decimalButton = document.querySelector("#decimal");
 const clickDecimal = () => {
