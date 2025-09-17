@@ -74,12 +74,16 @@ let currentValue;
 let previousButtonPressed;
 let isNextValue = false;
 
+const MAX_DISPLAY_LENGTH = 12;
 const display = document.querySelector("output");
 
 const clickDigitButton = (digit) => {
+  if (!isNextValue && String(currentValue).length >= MAX_DISPLAY_LENGTH) {
+    return;
+  }
   if (currentValue === "0" && !isNextValue) {
     // Can't add numbers after 0
-    return
+    return;
   }
   if (isNextValue) {
     display.textContent = digit;
