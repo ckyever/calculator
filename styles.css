@@ -1,5 +1,6 @@
 :root {
   --base-color: #3E3E3E;
+  --display-color: #4b4b4b;
   --border-color: #CFDEEB;
   --selected-border-color: #62a4dd;
   --text-color: white;
@@ -89,6 +90,7 @@ body {
   border: 2px solid var(--border-color);
   border-radius: 8px;
   padding: 16px 0 0 4px;
+  background-color: var(--display-color);
 }
 
 #numpad {
