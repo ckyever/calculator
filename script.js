@@ -153,5 +153,14 @@ const clickDecimal = () => {
       currentValue = display.textContent;
     }
   }
+  previousButtonPressed = decimalButton.textContent;
 };
 decimalButton.addEventListener("click", clickDecimal);
+
+const deleteButton = document.querySelector("#delete");
+const clickDelete = () => {
+  currentValue = null;
+  display.textContent = null;
+  previousButtonPressed = deleteButton.textContent;
+}
+deleteButton.addEventListener("click", clickDelete);
