@@ -1,3 +1,5 @@
+const SIGNIFICANT_DIGITS = 12;
+
 // Basic math operations
 function add(x, y) {
   return x + y;
@@ -61,7 +63,7 @@ function operate(x, y, operator) {
   }
 
   if (!isNaN(answer)) {
-    answer = parseFloat(answer.toFixed(10));
+    answer = Number(answer.toPrecision(SIGNIFICANT_DIGITS));
   }
 
   return answer;
@@ -74,11 +76,10 @@ let currentValue;
 let previousButtonPressed;
 let isNextValue = false;
 
-const MAX_DISPLAY_LENGTH = 12;
 const display = document.querySelector("output");
 
 const clickDigitButton = (digit) => {
-  if (!isNextValue && String(currentValue).length >= MAX_DISPLAY_LENGTH) {
+  if (!isNextValue && String(currentValue).length >= SIGNIFICANT_DIGITS) {
     return;
   }
   if (currentValue === "0" && !isNextValue) {
