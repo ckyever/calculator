@@ -58,8 +58,8 @@ function operate(x, y, operator) {
 
 // Actual calculator logic below
 let previousValue;
-let currentValue;
 let currentOperator;
+let currentValue;
 let previousButtonPressed;
 let isNextValue = false;
 
@@ -68,6 +68,10 @@ const display = document.querySelector("output");
 const digitButtons = document.querySelectorAll(".digit");
 digitButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (currentValue === "0" && !isNextValue) {
+      // Can't add numbers after 0
+      return
+    }
     if (isNextValue) {
       display.textContent = button.textContent;
       isNextValue = false;
